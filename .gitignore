@@ -1,3 +1,10 @@
+.idea/
+*.iml
+build/
+.build/
+target/
+build/
+
 *.class
 
 # Mobile Tools for Java (J2ME)
