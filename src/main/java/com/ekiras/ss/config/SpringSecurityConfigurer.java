@@ -53,9 +53,12 @@ public class SpringSecurityConfigurer extends WebSecurityConfigurerAdapter{
                 .expressionHandler(webExpressionHandler())
                 .antMatchers("/admin**").hasAuthority("ADMIN")
                 .antMatchers("/user**").hasAuthority("USER")
+                .antMatchers("/css/**","/js/**","/dist/**","/bower_components/**","/less/**","/fonts/**").permitAll()
                 .anyRequest().authenticated()
             .and()
             .formLogin()
+                .loginPage("/auth/login")
+                .permitAll()
             .and()
             .logout()
         ;

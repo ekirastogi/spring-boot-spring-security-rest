@@ -20,4 +20,5 @@ public class SecurityApplication {
         filterRegistrationBean.addUrlPatterns("/*");
         return filterRegistrationBean;
     }
+
 }
