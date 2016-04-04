@@ -1,20 +1,22 @@
 package com.ekiras.ss.controller;
 
 import org.springframework.security.access.prepost.PreAuthorize;
+import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
 
 /**
  * @author ekansh
  * @since 30/3/16
  */
-@RestController
+@Controller
 @RequestMapping("/admin")
 @PreAuthorize("hasAuthority('ADMIN')")
 public class AdminController {
 
-    @RequestMapping("")
+    private static final String path = "/admin/";
+
+    @RequestMapping({"","/"})
     public String home(){
-        return "Hello :: This is admin home";
+        return path+"index";
     }
 }

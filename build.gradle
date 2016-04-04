@@ -11,10 +11,11 @@ buildscript {
 }
 
 apply plugin: 'java'
+apply plugin: 'war'
 apply plugin: 'eclipse'
 apply plugin: 'spring-boot' 
 
-jar {
+war {
 	baseName = 'security'
 	version = '0.0.1-SNAPSHOT'
 }
@@ -32,6 +33,8 @@ dependencies {
 	compile('org.springframework.boot:spring-boot-starter-web')
     compile('org.apache.commons:commons-lang3:3.0.1')
 	runtime('mysql:mysql-connector-java')
+    compile("javax.servlet:jstl")
+    compile("org.sitemesh:sitemesh:3.0.0")
 	testCompile('org.springframework.boot:spring-boot-starter-test') 
 }
 
