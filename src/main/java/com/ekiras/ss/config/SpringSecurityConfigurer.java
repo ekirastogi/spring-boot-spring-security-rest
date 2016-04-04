@@ -37,11 +37,11 @@ public class SpringSecurityConfigurer extends WebSecurityConfigurerAdapter{
         auth.inMemoryAuthentication()
                 .withUser("ekansh")
                 .password("password")
-                .roles("USER", "ROLE");
+                .authorities("USER", "ROLE");
         auth.inMemoryAuthentication()
                 .withUser("admin")
                 .password("admin")
-                .roles("ADMIN");
+                .authorities("ADMIN");
     }
 
 
@@ -51,9 +51,9 @@ public class SpringSecurityConfigurer extends WebSecurityConfigurerAdapter{
         http
             .authorizeRequests()
                 .expressionHandler(webExpressionHandler())
-                .antMatchers("/admin**").hasRole("ADMIN")
-                .antMatchers("/user**").hasRole("USER")
-                .anyRequest().anonymous()
+                .antMatchers("/admin**").hasAuthority("ADMIN")
+                .antMatchers("/user**").hasAuthority("USER")
+                .anyRequest().authenticated()
             .and()
             .formLogin()
             .and()

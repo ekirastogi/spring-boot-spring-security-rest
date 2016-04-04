@@ -35,7 +35,9 @@ dependencies {
 	runtime('mysql:mysql-connector-java')
     compile("javax.servlet:jstl")
     compile("org.sitemesh:sitemesh:3.0.0")
-	testCompile('org.springframework.boot:spring-boot-starter-test') 
+	testCompile('org.springframework.boot:spring-boot-starter-test')
+    providedRuntime('org.springframework.boot:spring-boot-starter-tomcat')
+    providedRuntime('org.apache.tomcat.embed:tomcat-embed-jasper')
 }
 
 
