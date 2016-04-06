@@ -19,15 +19,6 @@ public class Role {
     @ManyToMany(mappedBy = "roles",fetch = FetchType.LAZY)
     private Set<User> users;
 
-    @Override
-    public String toString() {
-        return "Role{" +
-                "id=" + id +
-                ", role='" + role + '\'' +
-                ", users=" + users +
-                '}';
-    }
-
     public long getId() {
         return id;
     }

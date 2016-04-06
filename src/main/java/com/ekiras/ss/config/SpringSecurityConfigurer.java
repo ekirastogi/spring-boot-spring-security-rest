@@ -1,7 +1,8 @@
 package com.ekiras.ss.config;
 
+import com.ekiras.ss.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.context.annotation.Bean;
+import org.springframework.context.annotation.Configuration;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
@@ -9,25 +10,25 @@ import org.springframework.security.config.annotation.web.configuration.WebSecur
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.web.util.matcher.AntPathRequestMatcher;
 
-import javax.sql.DataSource;
-
 /**
  * @author ekansh
  * @since 30/3/16
  */
+@Configuration
 @EnableWebSecurity
 public class SpringSecurityConfigurer extends WebSecurityConfigurerAdapter{
 
-    @Autowired
-    private DataSource dataSource;
+    @Autowired private UserRepository userRepository;
 
     @Override
     protected void configure(AuthenticationManagerBuilder auth) throws Exception {
-        auth.jdbcAuthentication()
-                .usersByUsernameQuery("select username,password,enabled from user where username=?")
-                .authoritiesByUsernameQuery("select u.username,r.role from user u inner join user_roles ur on(u.id=ur.user_id) inner join role r on(ur.role_id=r.id)  where u.username=?")
-                .dataSource(dataSource);
-        auth.userDetailsService(userDetailsService());
+        auth.userDetailsService(userDetailsServiceBean());
+    }
+
+    @Override
+    public UserDetailsService userDetailsServiceBean() throws Exception {
+        System.out.println("   " + (userRepository==null));
+        return new SSUserDetailsService(userRepository);
     }
 
     @Override
@@ -44,8 +45,8 @@ public class SpringSecurityConfigurer extends WebSecurityConfigurerAdapter{
         ;
     }
 
-    @Bean
-    public UserDetailsService userDetailsService(){
-        return new SSUserDetailsService();
-    }
+
+
+
+
 }
