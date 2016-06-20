@@ -1,28 +1,16 @@
 package com.ekiras.ss.config;
 
-import org.springframework.security.config.annotation.web.builders.HttpSecurity;
+import com.ekiras.ss.security.config.RestSecurityConfigurerAdapter;
+import org.springframework.core.annotation.Order;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
-import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
 
 /**
  * @author ekansh
  * @since 30/3/16
  */
 @EnableWebSecurity
-public class SpringSecurityConfigurer extends WebSecurityConfigurerAdapter{
+@Order(1)
+public class SpringSecurityConfigurer extends RestSecurityConfigurerAdapter{
 
 
-    @Override
-    protected void configure(HttpSecurity http) throws Exception {
-        http
-            .authorizeRequests()
-                .antMatchers("/admin/**").hasRole("ADMIN")
-                .antMatchers("/user/**").fullyAuthenticated()
-                .anyRequest().authenticated()
-            .and()
-            .formLogin()
-            .and()
-            .logout()
-        ;
-    }
 }
